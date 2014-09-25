@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import org.junit.Test;
 
-import test.java.com.project.devtest.dao.PersonDao;
+import test.java.com.project.devtest.model.Person;
 
 public class StreamTest {
 	
@@ -20,7 +20,7 @@ public class StreamTest {
         
 		String[][] persons = {{"1", "xiaoming","Man", "IT","happy!"}, {"2", "xiaohong","Woman", "teacher","yoyo!"}, {"3", "xiaobaitu","Man", "Programmer","Show time!"}};
 		
-		List<PersonDao> test = Stream.of(persons).map(data -> new PersonDao(data[0], data[1], data[2],data[3], data[4])).collect(Collectors.toList());
+		List<Person> test = Stream.of(persons).map(data -> new Person(data[0], data[1], data[2],data[3], data[4])).collect(Collectors.toList());
 		
 		System.out.println("---filterTest:");
         filterTest(test);
@@ -46,9 +46,9 @@ public class StreamTest {
 	
    //	a non-interfering, stateless predicate to apply to each element to determine if it should be included
 	
-	public void filterTest(List<PersonDao> filter){
+	public void filterTest(List<Person> filter){
 		
-		Map<String, List<PersonDao>> people = filter.stream().filter(p -> p.getWork().equals("teacher")).collect(Collectors.groupingBy(PersonDao::getmark));
+		Map<String, List<Person>> people = filter.stream().filter(p -> p.getWork().equals("teacher")).collect(Collectors.groupingBy(Person::getmark));
 		
 		System.out.println(people);
 		
@@ -56,7 +56,7 @@ public class StreamTest {
 	
    //	a non-interfering, stateless function to apply to each element
 	
-	public void mapTest(List<PersonDao> map){
+	public void mapTest(List<Person> map){
 		
 		System.out.println(map.stream().map(p -> p.getId()+"+10086").collect(Collectors.toList()));
 		
@@ -64,7 +64,7 @@ public class StreamTest {
 	
    //	 a non-interfering, stateless function to apply to each element which produces a stream of new values
 	
-	public void flatMapTest(List<PersonDao> flatMap){
+	public void flatMapTest(List<Person> flatMap){
 		
 		System.out.println(flatMap.stream().flatMap(null).collect(Collectors.toList()));
 		
@@ -72,13 +72,13 @@ public class StreamTest {
 	
    //	a non-interfering action to perform on the elements as they are consumed from the stream
 	
-	public void peekTest(List<PersonDao> peek){
+	public void peekTest(List<Person> peek){
 		
 		peek.stream().peek(p -> {System.out.println(p.getName()+"'s Work is: " + p.getWork()); }).collect(Collectors.toList());
 		
 	}
 	
-	public void distinctTest(List<PersonDao> distinct){
+	public void distinctTest(List<Person> distinct){
 		
 		System.out.println(distinct.stream().distinct().collect(Collectors.toList()));
 		
@@ -86,7 +86,7 @@ public class StreamTest {
 	
    //	a non-interfering, stateless Comparator to be used to compare stream elements
 	
-	public void sortedTest(List<PersonDao> sorted){
+	public void sortedTest(List<Person> sorted){
 		
 		System.out.println(sorted.stream().sorted().collect(Collectors.toList()));
 		
@@ -94,7 +94,7 @@ public class StreamTest {
 	
    //	the number of elements the stream should be limited to
 	
-	public void limitTest(List<PersonDao> limit){
+	public void limitTest(List<Person> limit){
 		
 		System.out.println(limit.stream().limit(2).collect(Collectors.toList()));
 		
@@ -102,7 +102,7 @@ public class StreamTest {
 	
    //	the number of elements the stream should be skiped
 	
-	public void skipTest(List<PersonDao> skip){
+	public void skipTest(List<Person> skip){
 		
 		System.out.println(skip.stream().skip(2).collect(Collectors.toList()));
 		
